@@ -2,12 +2,21 @@
 
 clear
 cluster_name=${1}
+port_map_lb=${2}
 
 if [ -z ${cluster_name} ]; then
   echo 'ERROR: cluster name argument not defined, please pass the desired cluster name as an argument.'
   exit 1
 else
   echo "Creating cluster: ${cluster_name}"
+  echo '------------------------------------------------------'
+fi
+
+if [ -z ${port_map_lb} ]; then
+  echo 'ERROR: port mapping argument not defined, please pass the desired port mapping.'
+  exit 1
+else
+  echo "Port mapping to ne used: ${port_map_lb}"
   echo '------------------------------------------------------'
 fi
 
