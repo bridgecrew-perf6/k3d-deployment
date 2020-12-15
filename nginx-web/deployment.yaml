@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-web
+spec:
+  selector:
+    matchLabels:
+      run: nginx-web
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: nginx-web
+    spec:
+      containers:
+      - name: nginx-site
+        image: knmkonexion/nginx-web:latest
+        ports:
+        - containerPort: 80
