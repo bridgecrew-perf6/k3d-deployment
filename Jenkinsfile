@@ -22,7 +22,7 @@ pipeline {
     stage('Create Cluster') {
       steps {
         sh """
-          ./scripts/create_cluster.sh ${CLUSTER_NAME} ${PORT_MAP_LB} ${API_PORT} ${AGENT_NODES}
+          ./pipeline_scripts/create_cluster.sh ${CLUSTER_NAME} ${PORT_MAP_LB} ${API_PORT} ${AGENT_NODES}
         """
       }
     }
@@ -30,7 +30,7 @@ pipeline {
     stage('Deploy Sample Website') {
       steps {
         sh """
-          ./scripts/deploy_nginx.sh
+          ./pipeline_scripts/deploy_nginx.sh
         """
       }
     }

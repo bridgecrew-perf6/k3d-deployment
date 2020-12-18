@@ -1,6 +1,5 @@
 #!/bin/bash
 
-clear
 cluster_name=${1}
 port_map_lb=${2}
 api_port=${3}
