@@ -15,5 +15,6 @@ echo '____________________________________'
 
 namespace='dev'
 
-echo "---> Deploying Jenkins Master to $namespace <---"
+echo ''
+echo "---> Deploying Jenkins Master to namespace: $namespace <---"
 kubectl apply -f k8s/jenkins.yaml -n $namespace
