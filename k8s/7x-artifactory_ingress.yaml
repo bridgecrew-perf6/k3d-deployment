@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: artifactory-oss-artifactory
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /artifactory-api
+        pathType: Prefix
+        backend:
+          service:
+            name: artifactory-oss-artifactory
+            port:
+              number: 8081
+      - path: /artifactory-ui
+        pathType: Prefix
+        backend:
+          service:
+            name: artifactory-oss-artifactory
+            port:
+              number: 8082

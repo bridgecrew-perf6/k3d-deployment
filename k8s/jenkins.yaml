@@ -20,6 +20,8 @@ spec:
         env:
         - name: JAVA_OPTS
           value: -Xmx2048m -Djenkins.install.runSetupWizard=false
+        - name: JENKINS_OPTS
+          value: --prefix=/jenkins
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -28,16 +30,22 @@ spec:
         volumeMounts:
         - mountPath: /var/jenkins_home
           name: jenkins-home
+        - mountPath: /opt/kube_configs
+          name: kube-configs
         - mountPath: /var/run/docker.sock
           name: docker-sock
       restartPolicy: Always
       securityContext:
         fsGroup: 0
         runAsUser: 0
+      serviceAccountName: jenkins
       volumes:
       - name: jenkins-home
         hostPath:
-          path: /k3d_datastore/jenkins_home
+          path: /cluster_datastore/jenkins_home
+      - name: kube-configs
+        hostPath:
+          path: /cluster_datastore/kube_configs
       - name: docker-sock
         hostPath:
           path: /var/run/docker.sock

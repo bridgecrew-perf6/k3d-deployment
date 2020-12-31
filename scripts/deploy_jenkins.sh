@@ -17,4 +17,5 @@ namespace='dev'
 
 echo ''
 echo "---> Deploying Jenkins Master to namespace: $namespace <---"
+kubectl apply -f k8s/jenkins_rbac.yaml -n $namespace
 kubectl apply -f k8s/jenkins.yaml -n $namespace

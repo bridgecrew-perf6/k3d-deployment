@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: artifactory
+  labels:
+    app: artifactory
+spec:
+  selector:
+    matchLabels:
+      app: artifactory
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: artifactory
+    spec:
+      containers:
+      - name: artifactory
+        image: docker.bintray.io/jfrog/artifactory-oss:6.23.3
+        ports:
+        - containerPort: 8081
+          protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: artifactory
+  labels:
+    app: artifactory
+spec:
+  type: ClusterIP
+  ports:
+    - name: artifactory
+      port: 8081
+      targetPort: 8081
+      protocol: TCP
+  selector:
+    app: artifactory
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: artifactory
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /artifactory
+        pathType: Prefix
+        backend:
+          service:
+            name: artifactory
+            port:
+              number: 8081

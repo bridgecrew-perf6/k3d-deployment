@@ -14,7 +14,7 @@ pipeline {
     stage('Install k3d') {
       steps {
         sh """
-          curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
+          echo 'curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash'
         """
       }
     }
@@ -22,7 +22,7 @@ pipeline {
     stage('Create Cluster') {
       steps {
         sh """
-          ./pipeline_scripts/create_cluster.sh ${CLUSTER_NAME} ${PORT_MAP_LB} ${API_PORT} ${AGENT_NODES}
+          echo './pipeline_scripts/create_cluster.sh ${CLUSTER_NAME} ${PORT_MAP_LB} ${API_PORT} ${AGENT_NODES}'
         """
       }
     }
@@ -30,7 +30,7 @@ pipeline {
     stage('Deploy Sample Website') {
       steps {
         sh """
-          ./pipeline_scripts/deploy_nginx.sh
+          echo './pipeline_scripts/deploy_nginx.sh'
         """
       }
     }
