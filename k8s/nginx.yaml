@@ -6,14 +6,14 @@ spec:
   selector:
     matchLabels:
       run: nginx-web
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
         run: nginx-web
     spec:
       containers:
-      - name: nginx-site
+      - name: nginx-web
         image: knmkonexion/nginx-web:latest
         ports:
         - containerPort: 80
@@ -26,7 +26,7 @@ metadata:
     run: nginx-web
 spec:
   ports:
-    - name: web
+    - name: "80"
       port: 80
       targetPort: 80
   selector:
@@ -36,8 +36,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-web
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
   - http:
