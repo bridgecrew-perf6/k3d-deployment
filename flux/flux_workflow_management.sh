@@ -9,6 +9,6 @@ flux check --pre
 flux bootstrap github \
   --owner=$GITHUB_USER \
   --repository=kubernetes \
-  --branch=main \
+  --branch=master \
   --path=./clusters/workflow-manager \
   --personal
