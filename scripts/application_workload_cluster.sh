@@ -17,10 +17,9 @@ echo '---> Creating K3D cluster <---'
 CLUSTER_NAME='black-pearl'
 
 # NOTE: the docker.sock volume mapping is needed for Jenkins/Agents to use the Docker daemon
-k3d cluster create $CLUSTER_NAME --api-port 6555 -p '80:80@loadbalancer' -v /mnt/d/k8s_datastore:/cluster_datastore -v /var/run/docker.sock:/var/run/docker.sock --agents 3 --wait
+k3d cluster create $CLUSTER_NAME --api-port 6550 -p '80:80@loadbalancer' -v /mnt/d/k8s_datastore:/cluster_datastore --agents 3 --wait
 
-# This is useful if multiple clusters exist, it will allow future context switching...see the k3d docs...
-# export KUBECONFIG="$(k3d kubeconfig write ${CLUSTER_NAME})"
+export KUBECONFIG="$(k3d kubeconfig write ${CLUSTER_NAME})"
 
 echo ''
 echo '---> Creating namespace(s) <---'
