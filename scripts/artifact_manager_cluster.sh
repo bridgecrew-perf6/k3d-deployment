@@ -14,12 +14,22 @@ echo '______________________'
 
 echo ''
 echo '---> Creating K3D cluster <---'
-CLUSTER_NAME='registry'
+CLUSTER_NAME='artifact-manager'
 
 # NOTE: the docker.sock volume mapping is needed for Jenkins/Agents to use the Docker daemon
-k3d cluster create $CLUSTER_NAME --api-port 6559 -p '9000:80@loadbalancer' -v /mnt/d/k8s_datastore:/cluster_datastore --agents 3 --wait
+k3d cluster create $CLUSTER_NAME --api-port 6559 -p '8081:80@loadbalancer' -v /mnt/d/k8s_datastore:/cluster_datastore --agents 2 --wait
 
 export KUBECONFIG="$(k3d kubeconfig write ${CLUSTER_NAME})"
+
+echo ''
+echo '---> Creating namespace(s) <---'
+kubectl create namespace artifactory
+
+echo ''
+echo '---> Create namespace contexts <---'
+kubectl config set-context artifactory --namespace=artifactory
+
+kubectl get ns
 
 echo ''
 echo '-------------'
