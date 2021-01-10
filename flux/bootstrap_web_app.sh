@@ -12,4 +12,5 @@ flux bootstrap github \
   --repository=kubernetes \
   --branch=master \
   --path=./clusters/web-application \
-  --personal
+  --personal \
+  --verbose
